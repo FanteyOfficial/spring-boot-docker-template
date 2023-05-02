@@ -42,19 +42,19 @@ public class JavaBossBot extends TelegramLongPollingBot {
 	}
 
 	public void onUpdateReceived(Update update) {
-		if (update.hasMessage() && update.getMessage().hasText()) {
-			
-			long chatId = update.getMessage().getChatId();
-			
-			SendMessage message = new SendMessage();
-			message.setChatId(chatId);
-			message.setText("Benvenuto! Come posso aiutarti?");
-			
-			try {
-				execute(message);
-			} catch (TelegramApiException e) {
-				e.printStackTrace();
-			}
-		}
+		String command = update.getMessage().getText();
+
+        if (command.equals("/run")) {
+            String message = "Magari hai trovato un errore, magari no";
+            SendMessage response = new SendMessage();
+            response.setChatId(update.getMessage().getChatId().toString());
+            response.setText(message);
+
+            try {
+                execute(response);
+            } catch (TelegramApiException E) {
+                E.printStackTrace();
+            }
+        }
 	}
 }
