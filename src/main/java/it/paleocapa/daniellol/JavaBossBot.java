@@ -49,6 +49,9 @@ public class JavaBossBot extends TelegramLongPollingBot {
 		return botUsername;
 	}
 
+	/* lista bar */
+	ListaBar listaBar = new ListaBar();
+
 	@Override
 	public void onUpdateReceived(Update update) {
 		/*
@@ -76,8 +79,7 @@ public class JavaBossBot extends TelegramLongPollingBot {
 			"menu-insalata", "menu-cotoletta", "menu-riso"
 		);
 
-		/* lista bar */
-		ListaBar listaBar = new ListaBar();
+		
         
 		if (update.hasMessage() && update.getMessage().hasText()) {
 			String messageText = update.getMessage().getText();
