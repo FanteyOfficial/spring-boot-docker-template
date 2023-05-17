@@ -77,6 +77,7 @@ public class JavaBossBot extends TelegramLongPollingBot {
 		);
 
 		/* lista bar */
+		ListaBar listaBar = new ListaBar();
         
 		if (update.hasMessage() && update.getMessage().hasText()) {
 			String messageText = update.getMessage().getText();
@@ -89,7 +90,9 @@ public class JavaBossBot extends TelegramLongPollingBot {
 	
 				// Process the user and the food clicked
 				String username = update.getMessage().getFrom().getUserName();
-				String messageResponse = "User " + username + " clicked: " + foodClicked + " (Price: " + price + ")";
+				String messageResponse = "L'utente: " + username + " ha ordinato: " + foodClicked + " (Prezzo: " + price + ")";
+
+				listaBar.addFood(username, foodClicked);
 	
 				SendMessage response = new SendMessage();
 				response.setChatId(chatId);
@@ -130,9 +133,21 @@ public class JavaBossBot extends TelegramLongPollingBot {
 		/* if (command.equals("/add_food")) {
 
 		} */
+
 		if (command.equals("/show_list")) {
 
+			
+			SendMessage msg = new SendMessage();
+			msg.setChatId(chatId);
+			msg.setText(listaBar.getListaBarString());
+
+			try {
+                execute(msg);
+            } catch (TelegramApiException E) {
+                E.printStackTrace();
+            }
 		}
+		
 		/* if (command.equals("/show_menu")) {
 			sendMenuMessage(chatId);
 		} */
