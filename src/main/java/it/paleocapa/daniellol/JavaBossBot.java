@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
@@ -19,8 +16,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Service
 public class JavaBossBot extends TelegramLongPollingBot {
-
-	private static final Logger LOG = LoggerFactory.getLogger(JavaBossBot.class);
 
 	private String botUsername;
 	private static String botToken;
