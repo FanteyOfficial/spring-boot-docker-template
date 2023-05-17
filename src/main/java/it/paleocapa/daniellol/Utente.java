@@ -24,4 +24,8 @@ public class Utente {
     public ArrayList<String> getFoodList() {
         return foodList;
     }
+
+    public Double getTotPrice() {
+        return foodList.stream().map(food -> Double.parseDouble(food.split(" - ")[1].replaceAll("[€$]", ""))).mapToDouble(Double::doubleValue).sum();
+    }
 }

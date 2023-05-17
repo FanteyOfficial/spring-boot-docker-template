@@ -44,4 +44,12 @@ public class ListaBar {
     public ArrayList<String> getUserNameList() {
         return listaBar.stream().map(Utente::getNomeUtente).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
+
+    public Double getTotMyPrice(String nome) {
+        return listaBar.stream().filter(utente -> utente.getNomeUtente().equals(nome)).findFirst().get().getTotPrice();
+    }
+
+    public Double getTotPrice() {
+        return listaBar.stream().map(Utente::getTotPrice).mapToDouble(Double::doubleValue).sum();
+    }
 }

@@ -94,7 +94,7 @@ public class JavaBossBot extends TelegramLongPollingBot {
 				String username = update.getMessage().getFrom().getUserName();
 				String messageResponse = "L'utente: " + username + " ha ordinato: " + foodClicked + " (Prezzo: " + price + ")";
 
-				listaBar.addFood(username, foodClicked);
+				listaBar.addFood(username, messageText);
 	
 				SendMessage response = new SendMessage();
 				response.setChatId(chatId);
@@ -136,9 +136,19 @@ public class JavaBossBot extends TelegramLongPollingBot {
 
 		} */
 
-		if (command.equals("/show_list")) {
+		if (command.equals("/show_my_list")) {
+			SendMessage msg = new SendMessage();
+			msg.setChatId(chatId);
+			msg.setText(listaBar.getFoodList(update.getMessage().getFrom().getUserName().toString()).toString());
 
-			
+			try {
+				execute(msg);
+			} catch (TelegramApiException E) {
+				E.printStackTrace();
+			}
+		}
+
+		if (command.equals("/show_list")) {
 			SendMessage msg = new SendMessage();
 			msg.setChatId(chatId);
 			msg.setText(listaBar.getListaBarString());
@@ -148,6 +158,29 @@ public class JavaBossBot extends TelegramLongPollingBot {
             } catch (TelegramApiException E) {
                 E.printStackTrace();
             }
+		}
+
+		if (command.equals("/show_my_tot")) {
+			SendMessage msg = new SendMessage();
+			msg.setChatId(chatId);
+			msg.setText(listaBar.getTotMyPrice(update.getMessage().getFrom().getUserName().toString()).toString());
+
+			try {
+				execute(msg);
+			} catch (TelegramApiException E) {
+				E.printStackTrace();
+			}
+		}
+		if (command.equals("/show_tot")) {
+			SendMessage msg = new SendMessage();
+			msg.setChatId(chatId);
+			msg.setText(listaBar.getTotPrice().toString());
+
+			try {
+				execute(msg);
+			} catch (TelegramApiException E) {
+				E.printStackTrace();
+			}
 		}
 		
 		/* if (command.equals("/show_menu")) {
